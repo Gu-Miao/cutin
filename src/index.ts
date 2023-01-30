@@ -1,8 +1,7 @@
 const loadingDiv = document.querySelector('.loading') as HTMLDivElement
 const progressDiv = loadingDiv.querySelector('.progress') as HTMLDivElement
 const boxDiv = document.querySelector('.box') as HTMLDivElement
-const bodyBGInput = document.getElementById('body-background') as HTMLInputElement
-const canvasBGInput = document.getElementById('canvas-background') as HTMLInputElement
+const backgroundInput = document.getElementById('background') as HTMLInputElement
 const fpsInput = document.getElementById('fps') as HTMLInputElement
 const canvasWidthInput = document.getElementById('canvas-width') as HTMLInputElement
 const canvasHeightInput = document.getElementById('canvas-height') as HTMLInputElement
@@ -24,8 +23,7 @@ setBackgrounds()
 setMaxSize()
 loadImages()
 
-bodyBGInput.addEventListener('change', setBackgrounds)
-canvasBGInput.addEventListener('change', setBackgrounds)
+backgroundInput.addEventListener('change', setBackgrounds)
 
 cutinSelect.addEventListener('change', loadImages)
 
@@ -78,8 +76,8 @@ function setMaxSize() {
 
 /** Set backgrounds */
 function setBackgrounds() {
-  document.body.style.backgroundColor = bodyBGInput.value
-  canvas.style.backgroundColor = canvasBGInput.value
+  document.body.style.backgroundColor = backgroundInput.value
+  canvas.style.backgroundColor = backgroundInput.value
 }
 
 /** Set size of canvas */
