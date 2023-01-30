@@ -4,20 +4,53 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Map</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: black;
-      }
-    </style>
+    <title>Cutin</title>
+    <link rel="stylesheet" href="/src/index.less" />
   </head>
   <body>
     <canvas></canvas>
-    <script src="/index.ts" type="module"></script>
+    <div class="loading" style="display: none">
+      <div class="content">
+        <div class="text">Loading...</div>
+        <div class="progress">-/-</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="form-group">
+        <label for="body-background">Body background:</label>
+        <input type="color" id="body-background" value="#000000" />
+      </div>
+      <div class="form-group">
+        <label for="canvas-background">Canvas background:</label>
+        <input type="color" id="canvas-background" value="#000000" />
+      </div>
+      <div class="form-group">
+        <label for="fps">FPS:</label>
+        <input type="number" id="fps" value="15" min="0" max="60" step="1" />
+      </div>
+      <div class="form-group">
+        <label for="canvas-width">Canvas width:</label>
+        <input type="number" id="canvas-width" min="0" value="1200" max="1920" step="100" />
+      </div>
+      <div class="form-group">
+        <label for="canvas-height">Canvas height:</label>
+        <input type="number" id="canvas-height" min="0" value="900" max="1080" step="100" />
+      </div>
+      <div class="form-group">
+        <label for="clean-after-frames">Clean after frames:</label>
+        <input type="number" id="clean-after-frames" min="1" value="1" max="100" step="1" />
+      </div>
+      <div class="form-group">
+        <label for="cutin">Cutin:</label>
+        <select id="cutin">
+          <option value="fighter_nenmaster_neo_buff.img-18" selected>光之兵刃</option>
+          <option value="fighter_nenmaster_neo.img-20">念印幻流破</option>
+          <option value="nenmaster2nd.img-17">念帝旋天破</option>
+        </select>
+      </div>
+      <button id="fullscreen">Fullscreen</button>
+      <button id="toggle">Hide</button>
+    </div>
+    <script src="/src/index.ts" type="module"></script>
   </body>
 </html>
