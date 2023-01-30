@@ -47,10 +47,8 @@ function handleInput(e: Event) {
 }
 
 /** Fullscreen mode */
-async function fullscreen() {
-  await document.documentElement.requestFullscreen()
-  setMaxSize()
-  cleanCanvas()
+function fullscreen() {
+  document.documentElement.requestFullscreen()
 }
 
 /** Show or hide box */
