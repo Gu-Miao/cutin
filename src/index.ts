@@ -12,6 +12,7 @@ const toggleBtn = document.getElementById('toggle') as HTMLButtonElement
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
+let focusing = false
 const data = {
   images: [] as HTMLImageElement[],
   total: 0,
@@ -35,6 +36,18 @@ canvasWidthInput.addEventListener('input', handleInput)
 canvasHeightInput.addEventListener('input', handleInput)
 
 window.addEventListener('resize', setMaxSize)
+
+backgroundInput.addEventListener('focus', () => (focusing = true))
+fpsInput.addEventListener('focus', () => (focusing = true))
+canvasWidthInput.addEventListener('focus', () => (focusing = true))
+canvasHeightInput.addEventListener('focus', () => (focusing = true))
+cleanrAfterFramesInput.addEventListener('focus', () => (focusing = true))
+
+backgroundInput.addEventListener('blur', () => (focusing = false))
+fpsInput.addEventListener('blur', () => (focusing = false))
+canvasWidthInput.addEventListener('blur', () => (focusing = false))
+canvasHeightInput.addEventListener('blur', () => (focusing = false))
+cleanrAfterFramesInput.addEventListener('blur', () => (focusing = false))
 
 /** Handle input event of input numbers */
 function handleInput(e: Event) {
@@ -64,6 +77,7 @@ function toggleBox() {
 
 /** Set max size of canvas */
 function setMaxSize() {
+  if (focusing) return
   const mw = document.documentElement.clientWidth
   const mh = document.documentElement.clientHeight
   canvasWidthInput.value = mw.toString()
