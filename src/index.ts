@@ -142,13 +142,16 @@ function play() {
   let last = Date.now()
   let i = 0
   let frames = 0
+  let dsArr = new Array(data.total) as [number, number, number, number][]
+  let { width, height } = canvas
 
   function render() {
     if (data.loading) return
 
     const diff = (1 / +fpsInput.value) * 1000
     const now = Date.now()
-    const img = data.images[i % data.total]
+    const no = i % data.total
+    const img = data.images[no]
 
     if (last + diff <= now) {
       last = now
@@ -156,7 +159,18 @@ function play() {
         cleanCanvas()
         frames = 0
       }
-      ctx.drawImage(img, 0, 0, img.width, img.height, ...getDestinationSizes(img))
+
+      if (width !== canvas.width || height !== canvas.height) {
+        width = canvas.width
+        height = canvas.height
+        dsArr = new Array(data.total)
+      }
+
+      if (!dsArr[no]) {
+        dsArr[no] = getDestinationSizes(img)
+      }
+
+      ctx.drawImage(img, 0, 0, img.width, img.height, ...dsArr[no])
       frames++
       i++
     }
@@ -180,8 +194,8 @@ function cleanCanvas() {
  */
 function getDestinationSizes(img: HTMLImageElement): [number, number, number, number] {
   const { width, height } = img
-  const canvasWidth = +canvasWidthInput.value
-  const canvasHeight = +canvasHeightInput.value
+  const canvasWidth = canvas.width
+  const canvasHeight = canvas.height
   const r = canvasWidth / canvasHeight
   const c = width / height
 
