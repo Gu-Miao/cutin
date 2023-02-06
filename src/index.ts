@@ -7,6 +7,7 @@ const canvasWidthInput = document.getElementById('canvas-width') as HTMLInputEle
 const canvasHeightInput = document.getElementById('canvas-height') as HTMLInputElement
 const cutinSelect = document.getElementById('cutin') as HTMLSelectElement
 const cleanrAfterFramesInput = document.getElementById('clean-after-frames') as HTMLInputElement
+const mirrorImageInput = document.getElementById('mirror-image') as HTMLInputElement
 const fullscreenBtn = document.getElementById('fullscreen') as HTMLButtonElement
 const toggleBtn = document.getElementById('toggle') as HTMLButtonElement
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
@@ -28,6 +29,8 @@ backgroundInput.addEventListener('change', setBackgrounds)
 
 cutinSelect.addEventListener('change', loadImages)
 
+mirrorImageInput.addEventListener('change', setMirrorImage)
+
 toggleBtn.addEventListener('click', toggleBox)
 fullscreenBtn.addEventListener('click', fullscreen)
 
@@ -48,6 +51,11 @@ fpsInput.addEventListener('blur', () => (focusing = false))
 canvasWidthInput.addEventListener('blur', () => (focusing = false))
 canvasHeightInput.addEventListener('blur', () => (focusing = false))
 cleanrAfterFramesInput.addEventListener('blur', () => (focusing = false))
+
+/** Set mirror image effect */
+function setMirrorImage() {
+  canvas.style.transform = mirrorImageInput.checked ? 'scale(-1, 1)' : ''
+}
 
 /** Handle input event of input numbers */
 function handleInput(e: Event) {
@@ -157,6 +165,7 @@ function play() {
       last = now
       if (frames === +cleanrAfterFramesInput.value) {
         cleanCanvas()
+
         frames = 0
       }
 
@@ -171,6 +180,7 @@ function play() {
       }
 
       ctx.drawImage(img, 0, 0, img.width, img.height, ...dsArr[no])
+
       frames++
       i++
     }
