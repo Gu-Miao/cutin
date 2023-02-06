@@ -14,7 +14,6 @@ const canvas = document.querySelector('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
 type ImageJson = {
-  type: 'center' | 'fixed'
   area: [number, number]
   maxIndex: number
   positions: [number, number][]
@@ -176,7 +175,7 @@ function play() {
   let last = Date.now()
   let i = 0
   let frames = 0
-  const { type, area, positions } = cutinData.get(data.name) as ImageJson
+  const { area, positions } = cutinData.get(data.name) as ImageJson
   const [mw, mh] = area
   let { width, height } = canvas
   let dsArr = [] as [number, number, number, number][]
@@ -208,10 +207,8 @@ function play() {
         const r = data.ratio
         dx *= r
         dy *= r
-        if (type === 'center') {
-          dx += (canvas.width - mw * r) / 2
-          dy += (canvas.height - mh * r) / 2
-        }
+        dx += (canvas.width - mw * r) / 2
+        dy += (canvas.height - mh * r) / 2
 
         dsArr[index] = [dx, dy, img.width * r, img.height * r]
       }
