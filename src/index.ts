@@ -129,6 +129,7 @@ function setRatio() {
 /** Loading images */
 async function loadImages() {
   loadingDiv.style.display = ''
+  progressDiv.innerHTML = '-/-'
 
   const name = cutinSelect.value
 
